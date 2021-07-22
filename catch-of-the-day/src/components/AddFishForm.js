@@ -1,4 +1,5 @@
-import React from 'react'
+import React from "react";
+import PropTypes from "prop-types";
 
 class AddFishForm extends React.Component {
   nameRef = React.createRef();
@@ -7,8 +8,12 @@ class AddFishForm extends React.Component {
   descRef = React.createRef();
   imageRef = React.createRef();
 
+  static propTypes = {
+    addFish: PropTypes.func
+  };
 
-  createFish = (event) => {
+  createFish = event => {
+    // 1.  stop the form from submitting
     event.preventDefault();
     const fish = {
       name: this.nameRef.current.value,
@@ -17,13 +22,10 @@ class AddFishForm extends React.Component {
       desc: this.descRef.current.value,
       image: this.imageRef.current.value
     };
-
     this.props.addFish(fish);
     // refresh the form
     event.currentTarget.reset();
-    
-  }
-
+  };
   render() {
     return (
       <form className="fish-edit" onSubmit={this.createFish}>
@@ -48,8 +50,7 @@ class AddFishForm extends React.Component {
         />
         <button type="submit">+ Add Fish</button>
       </form>
-
-    )
+    );
   }
 }
 
